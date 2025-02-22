@@ -8,86 +8,46 @@ import com.example.sougna.domain.usecase.GetAllProductsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import java.util.UUID
 import javax.inject.Inject
 
-/**
- * Data class representing the UI state for products.
- *
- * @property isLoading Indicates if data is currently being loaded
- * @property products List of currently loaded products
- * @property error Error message if any occurred during data fetching
- */
+
 data class UIState(
     val isLoading: Boolean = false,
-    val products: List<Product> = emptyList(),
-    val error: String? = null
+    val errorMessage: String? = null,
+    val products: List<Product> = emptyList()
 )
 
-/**
- * ViewModel responsible for managing product-related data and state.
- *
- * This ViewModel:
- * - Holds and exposes the current state of products
- * - Provides methods to fetch and update product data
- * - Uses StateFlow for observable state management
- */
+
 @HiltViewModel
 class ProductViewModel @Inject constructor(
-    private val getAllProductsUseCase: GetAllProductsUseCase,
-    private val addProductUseCase: AddProductUseCase
+    private val getAllProductsUseCase: GetAllProductsUseCase
 ) : ViewModel() {
     // Internal mutable state flow for product data
     private val _uiState = MutableStateFlow(UIState())
 
     // Public immutable state flow exposed to UI components
-    val uiState: StateFlow<UIState> = _uiState.asStateFlow()
+    //val uiState: StateFlow<UIState> = _uiState.asStateFlow()
 
-    init {
-        // Fetch products when ViewModel is initialized
-        fetchProducts()
-    }
+    private val _products = getAllProductsUseCase().stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(),
+        emptyList()
+    )
 
-    /**
-     * Fetches products and updates the state.
-     */
-    private fun fetchProducts() {
-        viewModelScope.launch {
-            _uiState.value = _uiState.value.copy(isLoading = true)
-            try {
-                // Fetch products using the use case
-                _uiState.value = _uiState.value.copy(
-                    products = getAllProductsUseCase(),
-                    isLoading = false
-                )
-            } catch (e: Exception) {
-                _uiState.value = _uiState.value.copy(
-                    isLoading = false,
-                    error = e.message
-                )
-            }
-        }
-    }
+    val uiState = combine(
+        _uiState,
+        _products
+    ) { uiState, products -> uiState.copy(products = products) }.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5000),
+        UIState()
+    )
 
-    /**
-     * Adds a new product and updates the state.
-     * @param product The product to be added
-     */
-    fun addProduct(product: Product) {
-        viewModelScope.launch {
-            _uiState.value = _uiState.value.copy(isLoading = true)
-            try {
-                addProductUseCase(product)
-                // Refresh the product list after successful addition
-                fetchProducts()
-            } catch (e: Exception) {
-                _uiState.value = _uiState.value.copy(
-                    error = e.message ?: "Failed to add product",
-                    isLoading = false
-                )
-            }
-        }
-    }
 }

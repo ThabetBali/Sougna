@@ -15,6 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.sougna.ui.theme.SougnaTheme
 import com.example.sougna.presentation.view.AddProductScreen
 import com.example.sougna.presentation.view.MainScreen
+import com.example.sougna.presentation.viewmodel.AddProductViewModel
 import com.example.sougna.presentation.viewmodel.CategoryViewModel
 import com.example.sougna.presentation.viewmodel.ProductViewModel
 import dagger.hilt.EntryPoint
@@ -53,11 +54,11 @@ class MainActivity : ComponentActivity() {
                     composable("addProduct") {
                          Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                              //inject viewModel
-                             val productViewModel : ProductViewModel = hiltViewModel()
+                             val addProductViewModel : AddProductViewModel = hiltViewModel()
                         AddProductScreen(
                             modifier = Modifier.padding(innerPadding),
                             onBackClick = { navController.popBackStack() },
-                            productViewModel = productViewModel
+                            addProductViewModel = addProductViewModel
                         )
                          }
                     }

@@ -16,13 +16,15 @@ import java.util.Date
  * @property updatedAt Timestamp when the product was last updated.
  */
 data class Product(
-    val id: String,
-    val name: String,
-    val description: String,
-    val price: Double,
-    val userId: String,
-    val categoryId: String,
-    val thumbnailUrl: String,
+    val id: String = "",
+    val name: String = "",
+    val description: String = "",
+    val price: Double = 0.0,
+    val userId: String = "",
+    val categoryId: String = "",
+    val thumbnailUrl: String = "",
     val createdAt: Date = Date(),
     val updatedAt: Date = Date()
-)
+) {
+    constructor() : this("", "", "", 0.0, "", "", "", Date(), Date())
+}

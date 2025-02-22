@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.dagger.hilt.plugin)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.serialization)
-    alias(libs.plugins.google.services) apply true
+    alias(libs.plugins.google.services)
 }
 
 android {
@@ -71,9 +71,6 @@ dependencies {
     implementation(libs.google.firebase.analytics.ktx)
     implementation(libs.google.firebase.auth.ktx)
     implementation(libs.google.firebase.firestore.ktx)
-
-    //play services
-    //implementation(libs.google.play.services)
 
 
     implementation(platform(libs.androidx.compose.bom))

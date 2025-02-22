@@ -1,10 +1,11 @@
 package com.example.sougna.data.repository
 
 import com.example.sougna.data.model.Product
+import kotlinx.coroutines.flow.Flow
 
 interface ProductRepository {
 
-    suspend fun getAllProducts(): List<Product>
+    fun getAllProducts(): Flow<List<Product>>
     suspend fun addProduct(product: Product): Boolean
 
 }
