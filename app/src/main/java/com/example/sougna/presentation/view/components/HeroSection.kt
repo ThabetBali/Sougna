@@ -1,24 +1,21 @@
-package com.example.sougna.view.components
+package com.example.sougna.presentation.view.components
 
 
 import android.annotation.SuppressLint
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.derivedStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.sougna.presentation.viewmodel.CategoryViewModel
+import com.example.sougna.presentation.viewmodel.ProductViewModel
 
 
 @SuppressLint("RememberReturnType")
@@ -30,13 +27,19 @@ fun HeroSection() {
             .padding(2.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        val productViewModel = hiltViewModel<ProductViewModel>()
+        val categoryViewModel = hiltViewModel<CategoryViewModel>()
+
+        val uiState by productViewModel.uiState.collectAsState()
+        val categories by categoryViewModel.categoryState.collectAsState()
+
         Spacer(modifier = Modifier.height(5.dp))
 
-            CategoriesRow()
+            CategoriesRow(categories.categories)
 
         Spacer(modifier = Modifier.height(5.dp))
 
         // Product Grid
-        ProductGrid()
+        ProductGrid(uiState.products)
     }
 }

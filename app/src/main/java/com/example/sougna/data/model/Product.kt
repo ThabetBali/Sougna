@@ -20,11 +20,12 @@ data class Product(
     val name: String = "",
     val description: String = "",
     val price: Double = 0.0,
+    val rating: Double = 0.0,
     val userId: String = "",
     val categoryId: String = "",
     val thumbnailUrl: String = "",
     val createdAt: Date = Date(),
     val updatedAt: Date = Date()
 ) {
-    constructor() : this("", "", "", 0.0, "", "", "", Date(), Date())
+    constructor(rating: Float) : this("", "", "", 0.0, 0.0,"", "", "", Date(), Date())
 }

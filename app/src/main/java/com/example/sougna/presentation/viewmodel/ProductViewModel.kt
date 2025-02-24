@@ -11,9 +11,11 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import okhttp3.internal.wait
 import java.util.UUID
 import javax.inject.Inject
 
@@ -33,21 +35,21 @@ class ProductViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(UIState())
 
     // Public immutable state flow exposed to UI components
-    //val uiState: StateFlow<UIState> = _uiState.asStateFlow()
+    val uiState: StateFlow<UIState> = _uiState.asStateFlow()
 
-    private val _products = getAllProductsUseCase().stateIn(
-        viewModelScope,
-        SharingStarted.WhileSubscribed(),
-        emptyList()
-    )
+    private fun fetchProducts() {
+        viewModelScope.launch {
+            _uiState.value = _uiState.value.copy(isLoading = true)
+            getAllProductsUseCase().catch {
+                _uiState.value = _uiState.value.copy(errorMessage = it.message, isLoading = false)
+            }.collect { products ->
+                _uiState.value = _uiState.value.copy(products = products, isLoading = false)
+            }
+        }
+    }
 
-    val uiState = combine(
-        _uiState,
-        _products
-    ) { uiState, products -> uiState.copy(products = products) }.stateIn(
-        viewModelScope,
-        SharingStarted.WhileSubscribed(5000),
-        UIState()
-    )
+    init{
+        fetchProducts()
+    }
 
 }

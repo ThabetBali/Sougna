@@ -1,4 +1,4 @@
-package com.example.sougna.view.components
+package com.example.sougna.presentation.view.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
@@ -23,18 +23,18 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.example.sougna.R
-import com.example.sougna.model.Product
-import com.example.sougna.repository.ProductRepository.generateMockProducts
+import com.example.sougna.data.model.Product
 
 @Composable
-fun ProductGrid() {
-    val products = generateMockProducts()
+fun ProductGrid(products: List<Product>) {
+
     LazyVerticalGrid(
         columns = GridCells.Fixed(2), // Two columns
         verticalArrangement = Arrangement.spacedBy(12.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         modifier = Modifier.padding(16.dp)
     ) {
+
         items(products) { product ->
             ProductCard(product)
         }
@@ -56,17 +56,7 @@ fun ProductCard(product: Product) {
             modifier = Modifier.padding(12.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Product Image
-            if (product.imageRes != null) {
-                Image(
-                    painter = painterResource(id = product.imageRes),
-                    contentDescription = "Product Image",
-                    modifier = Modifier
-                        .size(120.dp)
-                        .clip(RoundedCornerShape(8.dp)),
-                    contentScale = ContentScale.Crop
-                )
-            } else if (product.thumbnailUrl.isNotEmpty()) {
+
                 Image(
                     painter = rememberAsyncImagePainter(product.thumbnailUrl),
                     contentDescription = "Product Image",
@@ -75,7 +65,7 @@ fun ProductCard(product: Product) {
                         .clip(RoundedCornerShape(8.dp)),
                     contentScale = ContentScale.Crop
                 )
-            }
+
 
             // Product Name
             Text(
@@ -144,12 +134,12 @@ fun ProductCard(product: Product) {
                         modifier = Modifier.size(16.dp)
                     )
 
-                    Text(
-                        text = product.apple.toString(), // Ensure it's a String
-                        fontSize = 14.sp,
-                        color = Color.Black,
-                        modifier = Modifier.padding(start = 4.dp)
-                    )
+//                    Text(
+//                        text = product.apple.toString(), // Ensure it's a String
+//                        fontSize = 14.sp,
+//                        color = Color.Black,
+//                        modifier = Modifier.padding(start = 4.dp)
+//                    )
                 }
 
                 // Chat Section
@@ -163,12 +153,12 @@ fun ProductCard(product: Product) {
                         modifier = Modifier.size(16.dp)
                     )
 
-                    Text(
-                        text = product.chat.toString(), // Ensure it's a String
-                        fontSize = 14.sp,
-                        color = Color.Black,
-                        modifier = Modifier.padding(start = 4.dp)
-                    )
+//                    Text(
+//                        text = product.chat.toString(), // Ensure it's a String
+//                        fontSize = 14.sp,
+//                        color = Color.Black,
+//                        modifier = Modifier.padding(start = 4.dp)
+//                    )
                 }
             }
         }

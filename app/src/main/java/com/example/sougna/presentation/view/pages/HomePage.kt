@@ -1,4 +1,4 @@
-package com.example.sougna.view.pages
+package com.example.sougna.presentation.view.pages
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
@@ -8,9 +8,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
-import com.example.sougna.view.components.Footer
-import com.example.sougna.view.components.HeroSection
-import com.example.sougna.view.components.Navbar
+import com.example.sougna.presentation.view.components.Footer
+import com.example.sougna.presentation.view.components.HeroSection
+import com.example.sougna.presentation.view.components.Navbar
 
 @SuppressLint("FrequentlyChangedStateReadInComposition")
 @Composable

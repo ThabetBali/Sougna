@@ -1,4 +1,4 @@
-package com.example.sougna.view.pages
+package com.example.sougna.presentation.view.pages
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer

@@ -5,7 +5,7 @@ plugins {
     alias(libs.plugins.dagger.hilt.plugin)
     alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.serialization)
-    alias(libs.plugins.google.services)
+//    alias(libs.plugins.google.services)
 }
 
 android {
@@ -53,8 +53,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
     // Compose integration with Activity for setting up Compose UI in Activities
     implementation(libs.androidx.activity.compose)
-    implementation("com.google.accompanist:accompanist-pager:0.32.0")
-    implementation("com.google.accompanist:accompanist-pager-indicators:0.32.0")
 
 
     // Coil image loading library for Compose to load and display images efficiently
@@ -71,10 +69,10 @@ dependencies {
 
     //firebase
 
-    implementation(platform(libs.google.firebase.bom))
-    implementation(libs.google.firebase.analytics.ktx)
-    implementation(libs.google.firebase.auth.ktx)
-    implementation(libs.google.firebase.firestore.ktx)
+//    implementation(platform(libs.google.firebase.bom))
+//    implementation(libs.google.firebase.analytics.ktx)
+//    implementation(libs.google.firebase.auth.ktx)
+//    implementation(libs.google.firebase.firestore.ktx)
 
 
     implementation(platform(libs.androidx.compose.bom))

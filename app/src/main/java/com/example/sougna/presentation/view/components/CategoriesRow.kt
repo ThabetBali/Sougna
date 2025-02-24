@@ -1,4 +1,4 @@
-package com.example.sougna.view.components
+package com.example.sougna.presentation.view.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -13,7 +13,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.ui.draw.clip
@@ -22,13 +21,13 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import com.example.sougna.model.Category
-import com.example.sougna.repository.CategoryRepository.generateMockCategories
+import com.example.sougna.data.model.Category
+
 
 
 @Composable
-fun CategoriesRow() {
-    val categories = generateMockCategories()
+fun CategoriesRow(categories: List<Category>) {
+
     LazyVerticalGrid(
         columns = GridCells.Fixed(4),
         verticalArrangement = Arrangement.spacedBy(8.dp),
@@ -36,6 +35,7 @@ fun CategoriesRow() {
         modifier = Modifier
             .padding(1.dp)
     ) {
+
         items(categories) { category ->
             CategoryCard(category)
         }

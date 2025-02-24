@@ -5,9 +5,6 @@ import com.example.sougna.data.repository.CategoryRepository
 import com.example.sougna.data.repository.CategoryRepositoryImp
 import com.example.sougna.data.repository.ProductRepository
 import com.example.sougna.data.repository.ProductRepositoryImp
-import com.google.firebase.Firebase
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.firestore
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,8 +17,8 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideProductRepository(firestore: FirebaseFirestore): ProductRepository {
-        return ProductRepositoryImp(firestore)
+    fun provideProductRepository(): ProductRepository {
+        return ProductRepositoryImp()
     }
 
     @Provides
@@ -30,11 +27,5 @@ object DataModule {
         return CategoryRepositoryImp()
     }
 
-
-    @Provides
-    @Singleton
-    fun provideFirestore(): FirebaseFirestore {
-        return Firebase.firestore
-    }
 
 }

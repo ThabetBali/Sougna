@@ -1,4 +1,4 @@
-package com.example.sougna.view.components
+package com.example.sougna.presentation.view.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

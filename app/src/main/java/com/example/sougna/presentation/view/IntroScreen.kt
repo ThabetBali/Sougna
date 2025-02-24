@@ -1,4 +1,4 @@
-package com.example.sougna.view
+package com.example.sougna.presentation.view
 
 import android.annotation.SuppressLint
 import androidx.compose.animation.*
@@ -11,18 +11,17 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import com.example.sougna.view.buttons.EnterButton
-import com.example.sougna.view.buttons.FirstPaginition
-import com.example.sougna.view.pages.IntroPage
-import com.example.sougna.view.buttons.NextButton
+import com.example.sougna.presentation.view.buttons.EnterButton
+import com.example.sougna.presentation.view.buttons.FirstPaginition
+import com.example.sougna.presentation.view.pages.IntroPage
+import com.example.sougna.presentation.view.buttons.NextButton
 import kotlinx.coroutines.delay
-import com.google.accompanist.pager.*
 import kotlinx.coroutines.launch
 
 @SuppressLint("UseOfNonLambdaOffsetOverload")
 @Composable
 fun IntroScreen(navController: NavHostController) {
-    val pagerState = rememberPagerState()
+    var pagerState by remember { mutableStateOf(0) }
     val scope = rememberCoroutineScope()
     var showButton by remember { mutableStateOf(false) }
     var moveTextUp by remember { mutableStateOf(false) }
@@ -46,13 +45,13 @@ fun IntroScreen(navController: NavHostController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
-        HorizontalPager(count = 3, state = pagerState) { page ->
-            when (page) {
+        //HorizontalPager(count = 3, state = pagerState) { page ->
+            when (pagerState) {
                 0 -> FirstPaginition("Sougna", "")
                 1 -> IntroPage("Fast & Secure", "Payment and Explore is secure.")
                 2 -> IntroPage("Get Started", "Let's dive into the app!")
             }
-        }
+        //}
 
         Spacer(modifier = Modifier.height(16.dp))
 
@@ -62,8 +61,8 @@ fun IntroScreen(navController: NavHostController) {
             enter = fadeIn() + slideInVertically(initialOffsetY = { it })
         ) {
             Row {
-                if (pagerState.currentPage < 2) {
-                    NextButton( onClick = { scope.launch { pagerState.animateScrollToPage(pagerState.currentPage + 1) } } )
+                if (pagerState < 2) {
+                    NextButton( onClick = { scope.launch { pagerState++ } } )
                 } else {
                     EnterButton(navController)
                 }
