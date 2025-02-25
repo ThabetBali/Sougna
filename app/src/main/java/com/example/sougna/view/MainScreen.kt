@@ -147,7 +147,7 @@ fun ProductList(products: List<Product>) {
                     Text(text = product.description, fontSize = 12.sp, color = Color.Gray, maxLines = 2)
                     Text(text = "${product.price} DA", color = Color(0xFFFFA000), fontWeight = FontWeight.Bold)
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        Text(text = "${product.rating} ⭐", fontSize = 12.sp)
+                        Text(text = "${product.rating} ", fontSize = 12.sp)
                         Spacer(modifier = Modifier.width(8.dp))
                         Text(text = "Appeler  Send", fontSize = 12.sp)
                     }
