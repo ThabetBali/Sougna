@@ -88,19 +88,19 @@ fun SearchBar(onSearch: (String) -> Unit) {
                 query = it
                 onSearch(it)
             },
-            label = { Text("Search...") },
+            label = { Text("Search") },
             shape = RoundedCornerShape(20.dp),
             modifier = Modifier
-                .weight(1f) // يجعل مربع البحث يأخذ معظم المساحة
-                .padding(end = 8.dp) // مسافة بين مربع البحث وأيقونة الإعدادات
+                .weight(1f)
+                .padding(end = 8.dp)
         )
 
         IconButton(
-            onClick = {  },
+            onClick = {},
             modifier = Modifier.size(48.dp)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.filtre), // استخدم صورة الإعدادات
+                painter = painterResource(id = R.drawable.filtre),
                 contentDescription = "Settings Icon"
             )
         }
@@ -130,7 +130,7 @@ fun ProductList(products: List<Product>) {
         items(products) { product ->
             Card(
                 shape = RoundedCornerShape(16.dp),
-                elevation = CardDefaults.cardElevation(4.dp),
+                elevation = CardDefaults.cardElevation(8.dp),
                 modifier = Modifier.padding(8.dp)
             ) {
                 Column(

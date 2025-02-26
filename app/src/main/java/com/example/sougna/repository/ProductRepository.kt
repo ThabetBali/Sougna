@@ -8,80 +8,56 @@ import java.util.Date
 class ProductRepository {
 
     fun getProducts(): Flow<List<Product>> = flow {
-        emit(generateMockProducts()) // إرسال قائمة المنتجات التجريبية
+        emit(generateMockProducts())
     }
 
     private fun generateMockProducts(): List<Product> {
         return listOf(
             Product(
                 id = "1",
-                name = "Iphone 15",
-                description = "أحدث هاتف من Apple مع أداء مذهل.",
+                name = "Iphone 16",
+                description = "The latest Iphone from Apple.",
                 price = 41000.0,
                 userId = "user1",
-                categoryId = "6", // الهواتف
-                thumbnailUrl = "https://images.unsplash.com/photo-1695048132832-b41495f12eb4?w=500&auto=format&fit=crop&q=60",
+                categoryId = "2",
+                thumbnailUrl = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn1.smartprix.com%2Frx-i5n1dTTOB-w280-h280%2Fapple-iphone-16-pro.jpg&f=1&nofb=1&ipt=261214cf8af00f16af4be327d001886688f3af584b450b6968616b16ae1dd0f1&ipo=images",
                 rating = 4.9,
                 createdAt = Date(),
                 updatedAt = Date()
             ),
             Product(
                 id = "2",
-                name = "Samsung S23",
-                description = "هاتف مميز من Samsung بمعالج قوي.",
+                name = "Samsung S25 ultra",
+                description = "The best Samsung phone ever",
                 price = 38000.0,
                 userId = "user2",
-                categoryId = "6", // الهواتف
-                thumbnailUrl = "https://images.unsplash.com/photo-1709744722656-9b850470293f?w=500&auto=format&fit=crop&q=60",
+                categoryId = "2",
+                thumbnailUrl = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fnightechs.com%2Fwp-content%2Fuploads%2F2024%2F09%2FSamsung-Galaxy-S25-Ultra.png&f=1&nofb=1&ipt=f612e94a7560ea9d5f19926f1a128137f6102422f7dffb8a4dda9078ca5e1fe8&ipo=images",
                 rating = 4.8,
                 createdAt = Date(),
                 updatedAt = Date()
             ),
             Product(
                 id = "3",
-                name = "MacBook Pro M2",
-                description = "لابتوب قوي بشريحة M2 من Apple.",
+                name = "Lenovo ThinkPad",
+                description = "A thin and powerful laptop from Lenovo",
                 price = 20000.0,
                 userId = "user3",
-                categoryId = "3", // الحواسيب
-                thumbnailUrl = "https://images.unsplash.com/photo-1580522154071-c6ca47a859ad?w=500&auto=format&fit=crop&q=60",
+                categoryId = "3",
+                thumbnailUrl = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Flaptopdecision.com%2Fimg%2Fcropped%2Fpx600%2FLenovo-ThinkPad-T15-Gen-2-top-view.jpg&f=1&nofb=1&ipt=0819bbdd6659d46636ec7182b334d451de0c83b6b811e2a212dbca71d72cca0e&ipo=images",
                 rating = 4.7,
                 createdAt = Date(),
                 updatedAt = Date()
             ),
             Product(
-                id = "4",
-                name = "PlayStation 5",
-                description = "أفضل منصة ألعاب تدعم تشغيل 4K.",
-                price = 4999.0,
-                userId = "user4",
-                categoryId = "7", // الإلكترونيات
-                thumbnailUrl = "https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8UGxheVN0YXRpb24lMjA1fGVufDB8fDB8fHww",
-                rating = 4.9,
-                createdAt = Date(),
-                updatedAt = Date()
-            ),
-            Product(
                 id = "5",
-                name = "Nike Air Max",
-                description = "حذاء رياضي مريح وخفيف الوزن.",
+                name = "Nike Air Jordans",
+                description = "A brand new shoes for sports",
                 price = 1200.0,
                 userId = "user5",
-                categoryId = "5", // الملابس
-                thumbnailUrl = "https://images.unsplash.com/photo-1562613521-6b5293e5b0ea?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTZ8fE5pa2UlMjBBaXIlMjBNYXh8ZW58MHx8MHx8fDA%3D",
+                categoryId = "5",
+                thumbnailUrl = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpics.craiyon.com%2F2023-09-27%2F285f7a327be147ed865f9ac295c79d31.webp&f=1&nofb=1&ipt=e18c24523396d66def0b1582c85e55c5e62e63e06bccc48dc393419d2ec3c907&ipo=images",
                 rating = 4.6,
-                createdAt = Date(),
-                updatedAt = Date()
-            ),
-            Product(
-                id = "6",
-                name = "Luxury Apartment",
-                description = "شقة فاخرة في وسط المدينة بإطلالة رائعة.",
-                price = 150000.0,
-                userId = "user6",
-                categoryId = "4", // العقارات
-                thumbnailUrl = "https://images.unsplash.com/photo-1580041065738-e72023775cdc?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8THV4dXJ5JTIwQXBhcnRtZW50fGVufDB8fDB8fHww",
-                rating = 4.8,
                 createdAt = Date(),
                 updatedAt = Date()
             )

@@ -6,8 +6,8 @@ package com.example.sougna.model
  * @property id Unique identifier for the category.
  */
 data class Category(
-    val id: String,         // إضافة id لتعريف فريد لكل فئة
-    val name: String,       // اسم الفئة
-    val description: String,// وصف الفئة
-    val icon: Int           // أيقونة الفئة
+    val id: String,
+    val name: String,
+    val description: String,
+    val icon: Int
 )
